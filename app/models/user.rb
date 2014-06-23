@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
   
-  validates :email, presence: true, email_format: true
+  validates :email, presence: true, email_format: true,
+            uniqueness: true
   
   before_save :capitalize_first_name
 

@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %title Crowdfunding
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %header.page-header.container-fluid
+      %nav.nav.navbar-default
+        %ul.nav.navbar-nav.navbar-left
+          %li= link_to "Fund.sy", root_path
+          %li= link_to "Campaigns", campaigns_path
+        %ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            %li= current_user.full_name
+            %li= link_to "Sign Out", sessions_path, method: :delete
+          - else
+            %li= link_to "Sign In", new_session_path
+    .container
+      - if flash[:notice]
+        .alert.alert-success= flash[:notice]
+      - elsif flash[:alert]
+        .alert.alert-danger= flash[:alert]
+      = yield

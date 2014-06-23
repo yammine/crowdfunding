@@ -1,0 +1,9 @@
+%h1= @campaign.title
+
+%p= @campaign.description
+
+%p Target: #{@campaign.target}
+%p Due Date: #{@campaign.end_date}
+
+=link_to "Edit", edit_campaign_path(@campaign), class: "btn btn-info"
+=link_to "Delete", @campaign, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"

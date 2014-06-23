@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create]
   resources :campaigns
-
+  resources :sessions, only: [:new, :create] do 
+    delete :destroy, on: :collection
+  end
   root "users#new"
   
   # The priority is based upon order of creation: first created -> highest priority.
