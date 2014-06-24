@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :campaigns, dependent: :destroy
+
+  has_many :pledges, dependent: :destroy
+  has_many :pledged_campaign, through: :pledges, source: :campaign
   
   validates :email, presence: true, email_format: true,
             uniqueness: true

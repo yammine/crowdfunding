@@ -6,6 +6,10 @@ class Campaign < ActiveRecord::Base
   validates :target, presence: true, numericality: { greater_than_or_equal_to: 10 }
 
   belongs_to :user
+  
+  has_many :pledges, dependent: :destroy
+  has_many :pledged_users, through: :pledges, source: :user
+
 
 
 end
