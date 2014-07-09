@@ -1,0 +1,4 @@
+%h1= @discussion.title
+%p= @discussion.description
+%hr
+= render partial: "/comments/listing_with_new", locals: { commentable: @discussion }

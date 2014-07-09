@@ -1,4 +1,4 @@
-%h1 Welcome to Fund.sy
+%h1= t('greetings.welcome')
 
 = link_to "Create Campaign", new_campaign_path, class: "btn btn-primary"
 %br
@@ -7,3 +7,5 @@
   .well
     %h2= link_to campaign.title, campaign
     %p= campaign.description.truncate(200)
+
+= will_paginate @campaigns

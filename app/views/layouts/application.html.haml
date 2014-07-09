@@ -5,19 +5,37 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    %script{src: "//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry", type: "text/javascript"}
+    %script{src: "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", type: "text/javascript"} :cdata
+
+
   %body
-    %header.page-header.container-fluid
-      %nav.nav.navbar-default
-        %ul.nav.navbar-nav.navbar-left
-          %li= link_to "Fund.sy", root_path
-          %li= link_to "Campaigns", campaigns_path
-        %ul.nav.navbar-nav.navbar-right
-          - if user_signed_in?
-            %li= current_user.full_name
-            %li= link_to "Sign Out", sessions_path, method: :delete
-          - else
-            %li= link_to "Sign Up", new_user_path
-            %li= link_to "Sign In", new_session_path
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          = link_to "Fund.sy", root_path, class: "navbar-brand"
+          %button.navbar-toggle.collapsed{"data-target" => "#navbar-main", "data-toggle" => "collapse", type: "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+        #navbar-main.navbar-collapse.collapse
+          = link_to_unless_current "English", locale: "en"
+          |
+          = link_to_unless_current "Spanish", locale: "es"
+          %ul.nav.navbar-nav.navbar-left
+            %li= link_to "Campaigns", campaigns_path
+            %li= link_to "Discussions", discussions_path
+          %ul.nav.navbar-nav.navbar-right
+            - if user_signed_in?
+              %li= link_to "Nearby Campaigns", nearby_campaigns_path
+              %li= link_to "My Campaigns", my_campaigns_path
+              %li= image_tag current_user.avatar.url(:thumb) if current_user.avatar.present?
+              %li= link_to current_user.full_name, "#"
+              %li= link_to "Sign Out", sessions_path, method: :delete
+            - else
+              %li= link_to "Sign Up", new_user_path
+              %li= link_to "Sign In", new_session_path
+
     .container
       - if flash[:notice]
         .alert.alert-success= flash[:notice]

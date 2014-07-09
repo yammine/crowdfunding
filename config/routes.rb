@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
   
+  resources :nearby_campaigns, only: [:index]
+  
+  resources :discussions do 
+    resources :comments, only: [:create, :destroy]
+  end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do 
+      resources :campaigns
+    end
+  end
+
+  resources :my_campaigns, only: [:index]
+
+  ActiveAdmin.routes(self)
   resources :users, only: [:new, :create]
 
   resources :sessions, only: [:new, :create] do 
@@ -7,10 +22,11 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns do
-    resources :pledges, only: [:new, :create, :destroy]
+    resources :pledges, only: [:index, :new, :create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
 
-  root "users#new"
+  root "campaigns#index"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

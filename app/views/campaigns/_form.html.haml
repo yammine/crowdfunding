@@ -1,20 +1,19 @@
 .well.col-xs-12.col-md-8
-  - if @campaign.errors.any?
-    %ul.errors
-      - @campaign.errors.full_messages.each do |err|
-        %li= err
-
-  = form_for @campaign do |f|
-    .form-group
-      = f.label :title
-      = f.text_field :title, class: "form-control"
-    .form-group
-      = f.label :description
-      = f.text_area :description, class: "form-control"
-    .form-group
-      = f.label :target
-      = f.text_field :target, class: "form-control"
+  = simple_form_for @campaign, html: {class: "form-horizontal"} do |f|
+    = f.input :title
+    = f.input :description
+    = f.input :target
+    = f.input :address
     .form-group
       = f.label :end_date
-      = f.date_field :end_date, class: "form-control"
-    = f.submit "Submit", class: "btn btn-primary"
+      = f.date_field :end_date
+    =# f.input :end_date, as: :date, start_day: Time.now.day, start_month: Time.now.month, start_year: Time.now.year, end_year: (Time.now + 60.days).year
+    
+    %h2 Reward Levels
+
+    = f.fields_for :reward_levels do |rl|
+      = render "reward_level_fields", f: rl
+
+    = link_to_add_field("Add Reward Level", f, :reward_levels)
+
+    = f.submit class: "btn btn-success"

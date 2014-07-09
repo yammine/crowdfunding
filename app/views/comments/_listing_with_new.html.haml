@@ -1,0 +1,11 @@
+%h2 Comments
+
+= simple_form_for [commentable, @comment] do |f|
+  = f.input :body
+  = f.submit class: "btn btn-primary"
+
+%hr
+
+- commentable.comments.each do |comment|
+  .well= comment.body
+

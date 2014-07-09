@@ -1,0 +1,5 @@
+%h1 Pledge
+
+= simple_form_for [@campaign, @pledge], html: {class: "form-horizontal"} do |f|
+  = f.input :amount, label: "Pledge Amount", placeholder: "Enter a Pledge of 1$ or more."
+  = f.submit "Pledge", class: "btn btn-info"

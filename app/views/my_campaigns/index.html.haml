@@ -1,0 +1,12 @@
+%h1 My Campaigns
+
+= link_to "Create Campaign", new_campaign_path, class: "btn btn-primary"
+%br
+%br
+- @campaigns.each do |campaign|
+  .well
+    %h2= link_to campaign.title, campaign
+    %p= campaign.description.truncate(200)
+    %p= campaign.state
+
+= will_paginate @campaigns

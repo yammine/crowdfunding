@@ -1,19 +1,17 @@
 %h1 Register an Account
+
 .well.col-xs-12.col-md-8
-  = form_for @user do |f|
-    .form-group
-      = f.label :first_name
-      = f.text_field :first_name, class: "form-control"
-    .form-group
-      = f.label :last_name
-      = f.text_field :last_name, class: "form-control"
-    .form-group
-      = f.label :email 
-      = f.email_field :email, class: "form-control"
-    .form-group
-      = f.label :password
-      = f.password_field :password, class: "form-control"
-    .form-group
-      = f.label :password_confirmation 
-      = f.password_field :password_confirmation, class: "form-control"
+  = simple_form_for @user, html: {class: "form-horizontal"} do |f|
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+    = f.input :avatar
+    %h2 Profile Info
+    = f.fields_for :profile do |pro|
+      = pro.input :age
+      = pro.input :address
+      = pro.input :bio
+      %hr
     = f.submit "Register", class: "btn btn-primary"

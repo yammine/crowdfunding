@@ -1,0 +1,7 @@
+%h1 All Discussions
+= link_to "New Discussion", new_discussion_path, class: "btn btn-primary"
+- @discussions.each do |discussion|
+  .well
+    %h2= link_to discussion.title, discussion
+    %p= discussion.description
+    %hr

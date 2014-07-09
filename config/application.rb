@@ -27,5 +27,11 @@ module Crowdfunding
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.autoload_paths += Dir[Rails.root.join('app', 'validators', '*').to_s]
+    config.autoload_paths += Dir[Rails.root.join('app', 'decorators', '*').to_s]
+
+    console do 
+      require "pry"
+      config.console = Pry  
+    end
   end
 end

@@ -1,9 +1,28 @@
-%h1= @campaign.title
+.well
+  %h1
+    = @campaign.title
 
-%p= @campaign.description
+    = @campaign.label
+    
+    = @campaign.action_button
 
-%p Target: #{@campaign.target}
-%p Due Date: #{@campaign.end_date}
 
-=link_to "Edit", edit_campaign_path(@campaign), class: "btn btn-info"
-=link_to "Delete", @campaign, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+  %p= @campaign.description
+
+  %p Target: #{@campaign.target}
+  %p Due Date: #{@campaign.end_date}
+
+  
+
+  = link_to "Pledge", new_campaign_pledge_path(@campaign), class: "btn btn-primary"
+  %br
+
+  = link_to "List of Pledges", campaign_pledges_path(@campaign), class: "btn btn-warning"
+
+  %br
+  - if can? :edit, @campaign
+    =link_to "Edit", edit_campaign_path(@campaign), class: "btn btn-info"
+  - if can? :delete, @campaign
+    =link_to "Delete", @campaign, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+
+= render partial: "/comments/listing_with_new", locals: { commentable: @campaign }

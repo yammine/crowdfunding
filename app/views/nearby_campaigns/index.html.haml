@@ -1,0 +1,13 @@
+%h1 NearbyCampaigns
+
+%br
+%div{style: "width: 800px;"}
+  #map{style: "width: 800px; height: 400px;"}
+
+:javascript
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(#{generate_map_json(@campaigns).to_json});
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });

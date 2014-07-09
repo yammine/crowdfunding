@@ -1,11 +1,6 @@
 %h1 Sign In
 .well.col-xs-12.col-md-8
-  = form_for "", url: sessions_path, html: { class: "form-horizontal" } do |f|
-    .form-group
-      = f.label :email
-      = f.email_field :email, class: "form-control"
-    .form-group
-      = f.label :password
-      = f.password_field :password, class: "form-control"
-
+  = simple_form_for "", url: sessions_path, html: { class: "form-horizontal"} do |f|
+    = f.input :email
+    = f.input :password
     = f.submit "Sign In", class: "btn btn-primary"

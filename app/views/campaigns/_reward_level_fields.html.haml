@@ -1,0 +1,8 @@
+%fieldset
+  = f.input :name
+  = f.input :amount
+  = f.input :details
+  = f.input :_destroy, as: :hidden
+  = link_to "Remove Reward Level", "javascript:void(0);", class: "remove-field btn btn-xs btn-danger pull-right"
+
+%hr
