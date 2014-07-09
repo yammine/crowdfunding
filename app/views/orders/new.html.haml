@@ -1,0 +1,20 @@
+%h1 Pay here
+
+= simple_form_for [@pledge, @order] do |f|
+  = f.input :stripe_card_token, as: :hidden
+#stripe-errors
+= form_tag "", id: "cc-form" do 
+  .form-group
+    = label_tag :card_number
+    = text_field_tag :card_number, nil, name: nil, class: "form-control"
+  .form-group
+    = label_tag :cvc
+    = text_field_tag :cvc, nil, name: nil, class: "form-control"
+  .form-group
+    = label_tag :expiry_date
+    = select_month nil, { add_month_numbers: true }, { name: nil, id: "card-month" }
+    = select_year nil, { start_year: Date.today.year, end_year: Date.today.year + 10 }, { name: nil, id: "card-year" }
+  .form-group
+    %noscript JavaScript needs to be enabled for this payment to work. Please enable it before continuing.
+    = submit_tag "Pay for the Pledge", class: "btn btn-primary"
+

@@ -21,7 +21,7 @@ class PledgesController < ApplicationController
                                        user: current_user,
                                        campaign: @campaign)
     if service.call
-      redirect_to @campaign, notice: "Pledge created"
+      redirect_to new_pledge_order_path(service.pledge)
     else
       @pledge = service.pledge
       render :new

@@ -3,11 +3,11 @@
   %head
     %title Crowdfunding
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', "https://js.stripe.com/v1/",'data-turbolinks-track' => true
     = csrf_meta_tags
     %script{src: "//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry", type: "text/javascript"}
     %script{src: "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", type: "text/javascript"} :cdata
-
+    =tag :meta, name: "stripe-key", content: Rails.application.secrets.stripe_publishable_key
 
   %body
     .navbar.navbar-default.navbar-fixed-top

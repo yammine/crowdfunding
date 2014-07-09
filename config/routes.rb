@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+
   resources :nearby_campaigns, only: [:index]
   
   resources :discussions do 
@@ -24,6 +25,10 @@ Rails.application.routes.draw do
   resources :campaigns do
     resources :pledges, only: [:index, :new, :create, :destroy]
     resources :comments, only: [:create, :destroy]
+  end
+
+  resources :pledges, only: [] do 
+    resources :orders, only: [:new, :create]
   end
 
   root "campaigns#index"
